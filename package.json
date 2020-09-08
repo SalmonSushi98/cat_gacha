@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "deploy": "gh-pages -d build"
+  },
+  "homepage": "https://SalmonSushi98.github.io/cat_gacha"
+}

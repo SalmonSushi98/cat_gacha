@@ -40,30 +40,31 @@
           })
           .then(() => {
             setTimeout(() => {
-              let attackValue = Math.floor(Math.random()*1000)
-              while ( attackValue < 100 ) {
-                attackValue = Math.floor(Math.random()*1000)
-              }
-              span[1].innerHTML = attackValue
               const level = Math.floor(Math.random()*100)
               if ( level < 40 ) {
                 span[0].innerHTML = '노멀'
                 span[0].style.color = 'gray'
+                span[1].innerHTML = Math.floor(Math.random()*400)
               } else if ( level < 70 ) {
                 span[0].innerHTML = '레어'
                 span[0].style.color = 'skyblue'
+                span[1].innerHTML = 400 + Math.floor(Math.random()*300)
               } else if ( level < 85 ) {
                 span[0].innerHTML = '에픽'
                 span[0].style.color = 'purple'
+                span[1].innerHTML = 700 + Math.floor(Math.random()*150)
               } else if ( level < 95 ) {
                 span[0].innerHTML = '유니크'
                 span[0].style.color = 'yellow'
+                span[1].innerHTML = 850 + Math.floor(Math.random()*100)
               }  else if ( level < 98 ) {
                 span[0].innerHTML = '레전드리'
                 span[0].style.color = 'lime'
+                span[1].innerHTML = 950 + Math.floor(Math.random()*30)
               } else {
                 span[0].innerHTML = '고양이신'
                 span[0].style.color = 'red'
+                span[1].innerHTML = 980 + Math.floor(Math.random()*25)
               }
             }, 1000)
           })

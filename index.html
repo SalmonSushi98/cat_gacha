@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      img {
+        width: 50vw; max-width: 400px;
+        height: 60vw; max-height: 445px;
+      }
+      div {
+        font-size: 2.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>강한 고양이를 뽑아보세요.</h1>
+    <img>
+    <div class="level">등급: <span></span></div>
+    <div class="attack">공격력: <span></span></div>
+    <br />
+    <button>뽑기</button>
+    <script>
+      const img = document.querySelector('img')
+      const btn = document.querySelector('button')
+      const span = document.querySelectorAll('span')
+
+      function getCatImg () {
+        const url = 'https://aws.random.cat/meow'
+        fetch(url)
+          .then(( res ) => res.json())
+          .then(( data ) => {
+            console.log(data.file)
+            img.src = data.file
+            btn.innerHTML = "다시뽑기"
+          })
+          .then(() => {
+            setTimeout(() => {
+              let attackValue = Math.floor(Math.random()*1000)
+              while ( attackValue < 100 ) {
+                attackValue = Math.floor(Math.random()*1000)
+              }
+              span[1].innerHTML = attackValue
+              const level = Math.floor(Math.random()*100)
+              if ( level < 40 ) {
+                span[0].innerHTML = '노멀'
+                span[0].style.color = 'gray'
+              } else if ( level < 70 ) {
+                span[0].innerHTML = '레어'
+                span[0].style.color = 'skyblue'
+              } else if ( level < 85 ) {
+                span[0].innerHTML = '에픽'
+                span[0].style.color = 'purple'
+              } else if ( level < 95 ) {
+                span[0].innerHTML = '유니크'
+                span[0].style.color = 'yellow'
+              }  else if ( level < 98 ) {
+                span[0].innerHTML = '레전드리'
+                span[0].style.color = 'lime'
+              } else {
+                span[0].innerHTML = '고양이신'
+                span[0].style.color = 'red'
+              }
+            }, 1000)
+          })
+      }
+
+      btn.addEventListener('click', getCatImg)
+    </script>
+  </body>
+</html>

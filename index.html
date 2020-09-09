@@ -13,7 +13,7 @@
         height: 60vw; max-height: 445px;
       }
       div {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
     </style>
   </head>
@@ -22,6 +22,7 @@
     <img>
     <div class="level">등급: <span></span></div>
     <div class="attack">공격력: <span></span></div>
+    <div class="pretty">귀여움: <span></span></div>
     <br />
     <button>뽑기</button>
     <script>
@@ -41,6 +42,7 @@
           .then(() => {
             setTimeout(() => {
               const level = Math.floor(Math.random()*100)
+              span[2].innerHTML = Math.floor(Math.random()*100)
               if ( level < 40 ) {
                 span[0].innerHTML = '노멀'
                 span[0].style.color = 'gray'
@@ -62,9 +64,15 @@
                 span[0].style.color = 'lime'
                 span[1].innerHTML = 950 + Math.floor(Math.random()*30)
               } else {
-                span[0].innerHTML = '고양이신'
-                span[0].style.color = 'red'
-                span[1].innerHTML = 980 + Math.floor(Math.random()*25)
+                if ( Math.floor(Math.random()*10) === 0 ) {
+                  span[0].innerHTML = '먐먀'
+                  span[0].style.color = 'pink'
+                  span[1].innerHTML = 1020 + Math.floor(Math.random()*15)
+                } else {
+                  span[0].innerHTML = '고양이신'
+                  span[0].style.color = 'red'
+                  span[1].innerHTML = 980 + Math.floor(Math.random()*25)
+                }
               }
             }, 1000)
           })

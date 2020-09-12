@@ -48,7 +48,7 @@ function getCatImg () {
             span[2].innerHTML = 980 + Math.floor(Math.random()*25)
           }
         }
-      }, 1000)
+      }, 500)
     })
 }
 

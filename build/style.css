@@ -1,0 +1,53 @@
+body {
+  text-align: center;
+}
+h1 {
+  margin-bottom: -0.8rem;
+}
+.catImg {
+  width: 50vw; max-width: 400px;
+  height: 60vw; max-height: 445px;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-size: cover;
+  margin: auto;
+}
+.catStatus {
+  font-size: 2rem;
+}
+.coinStatus {
+  font-size: 1.2rem;
+  margin-bottom: -0.6rem;
+  padding: 1rem;
+}
+.coinStatus button {
+  margin-left: 2rem;
+  font-size: 1.2rem;
+}
+#modal {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  display: none;
+}
+.modal-content {
+  width: 40vw; max-width: 380px;
+  height: 40vw; max-height: 400px;
+  background-color: white;
+  margin: 10rem auto;
+}
+.gameBoard {
+  width: 80%;
+  position: relative; top: 2rem;
+  margin: auto;
+}
+.gameBoard div {
+  padding: 0.5rem;
+  border: 1px solid black;
+}
+.myField input {
+  width: 4.4rem; height: 3rem;
+}
+.back {
+  position: relative; top: 6rem;
+}

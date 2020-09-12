@@ -31,8 +31,8 @@ h1 {
   display: none;
 }
 .modal-content {
-  width: 40vw; max-width: 380px;
-  height: 40vw; max-height: 400px;
+  width: 40vw; max-width: 380px; min-width: 260px;
+  height: 40vw; max-height: 400px; min-height: 260px;
   background-color: white;
   margin: 10rem auto;
 }
@@ -46,8 +46,8 @@ h1 {
   border: 1px solid black;
 }
 .myField input {
-  width: 4.4rem; height: 3rem;
+  width: 30%; height: 3rem;
 }
 .back {
-  position: relative; top: 6rem;
+  margin-top: 30%;
 }

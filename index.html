@@ -4,81 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sample</title>
-    <style>
-      body {
-        text-align: center;
-      }
-      img {
-        width: 50vw; max-width: 400px;
-        height: 60vw; max-height: 445px;
-      }
-      div {
-        font-size: 2rem;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="main.js" defer></script>
   </head>
   <body>
     <h1>강한 고양이를 뽑아보세요.</h1>
-    <img>
-    <div class="level">등급: <span></span></div>
-    <div class="attack">공격력: <span></span></div>
-    <div class="pretty">귀여움: <span></span></div>
+    <div class="coinStatus">
+      코인: <span>10</span>개
+      <button>코인 얻기</button>
+    </div>
+    <div class="catImg"></div>
+    <div class="catStatus">
+      <div class="level">등급: <span></span></div>
+      <div class="attack">공격력: <span></span></div>
+      <div class="pretty">귀여움: <span></span></div>
+    </div>
     <br />
     <button>뽑기</button>
-    <script>
-      const img = document.querySelector('img')
-      const btn = document.querySelector('button')
-      const span = document.querySelectorAll('span')
-
-      function getCatImg () {
-        const url = 'https://aws.random.cat/meow'
-        fetch(url)
-          .then(( res ) => res.json())
-          .then(( data ) => {
-            console.log(data.file)
-            img.src = data.file
-            btn.innerHTML = "다시뽑기"
-          })
-          .then(() => {
-            setTimeout(() => {
-              const level = Math.floor(Math.random()*100)
-              span[2].innerHTML = Math.floor(Math.random()*100)
-              if ( level < 40 ) {
-                span[0].innerHTML = '노멀'
-                span[0].style.color = 'gray'
-                span[1].innerHTML = Math.floor(Math.random()*400)
-              } else if ( level < 70 ) {
-                span[0].innerHTML = '레어'
-                span[0].style.color = 'skyblue'
-                span[1].innerHTML = 400 + Math.floor(Math.random()*300)
-              } else if ( level < 85 ) {
-                span[0].innerHTML = '에픽'
-                span[0].style.color = 'purple'
-                span[1].innerHTML = 700 + Math.floor(Math.random()*150)
-              } else if ( level < 95 ) {
-                span[0].innerHTML = '유니크'
-                span[0].style.color = 'yellow'
-                span[1].innerHTML = 850 + Math.floor(Math.random()*100)
-              }  else if ( level < 98 ) {
-                span[0].innerHTML = '레전드리'
-                span[0].style.color = 'lime'
-                span[1].innerHTML = 950 + Math.floor(Math.random()*30)
-              } else {
-                if ( Math.floor(Math.random()*10) === 0 ) {
-                  span[0].innerHTML = '먐먀'
-                  span[0].style.color = 'pink'
-                  span[1].innerHTML = 1020 + Math.floor(Math.random()*15)
-                } else {
-                  span[0].innerHTML = '고양이신'
-                  span[0].style.color = 'red'
-                  span[1].innerHTML = 980 + Math.floor(Math.random()*25)
-                }
-              }
-            }, 1000)
-          })
-      }
-
-      btn.addEventListener('click', getCatImg)
-    </script>
+    <div id="modal">
+      <div class="modal-content">
+        <div class="gameBoard">
+          <div class="enemyField">???</div>
+          <div class="result">두근두근</div>
+          <div class="myField">
+            <input type="button" value="가위">
+            <input type="button" value="바위">
+            <input type="button" value="보">
+          </div>
+        </div>
+        <button class="back">돌아가기</button>
+      </div>
+    </div>
   </body>
 </html>

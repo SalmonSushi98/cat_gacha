@@ -2,7 +2,10 @@ const img = document.querySelector('.catImg')
 const btn = document.querySelectorAll('button')
 const span = document.querySelectorAll('span')
 const modal = document.querySelector('#modal')
+const modal2 = document.querySelector('#modal2')
+const xBtn = document.querySelector('.modal2__top i')
 const input = document.querySelectorAll('input')
+let catImgUrl = ''
 
 // 고양이 이미지 가져오기
 function getCatImg () {
@@ -11,6 +14,7 @@ function getCatImg () {
     .then(( res ) => res.json())
     .then(( data ) => {
       console.log(data.file)
+      catImgUrl = data.file
       img.style.backgroundImage = `url("${data.file}")`
     })
     .then(() => {
@@ -58,7 +62,7 @@ btn[0].addEventListener('click', () => {
 })
 
 // 뽑기 버튼
-btn[1].addEventListener('click', () => {
+btn[2].addEventListener('click', () => {
   if ( window.confirm("한번 뽑는데 코인 1개가 소모됩니다. 뽑겠습니까?") ) {
     if ( span[0].innerHTML > 0 ) {
       span[0].innerHTML = --span[0].innerHTML
@@ -71,7 +75,7 @@ btn[1].addEventListener('click', () => {
 })
 
 // 돌아가기 버튼
-btn[2].addEventListener('click', () => {
+btn[4].addEventListener('click', () => {
   modal.style.display = 'none'
 })
 
@@ -87,6 +91,7 @@ function RCP ( e ) {
   const enemyRCP = Math.floor(Math.random()*3)
   const EF = document.querySelector('.enemyField')
   const RF = document.querySelector('.result')
+  const coin = parseInt(span[0].innerHTML)
   switch(enemyRCP) {
     case 0:
       EF.innerHTML = '가위'
@@ -106,13 +111,13 @@ function RCP ( e ) {
         RF.innerHTML = "졌습니다!"
       } else {
         RF.innerHTML = "이겼습니다!"
-        span[0].innerHTML = ++span[0].innerHTML
+        span[0].innerHTML = coin + 2
         localStorage.coin = span[0].innerHTML
       }
     } else if ( e.target.value === "바위" ) {
       if ( EF.innerHTML === "가위" ) {
         RF.innerHTML = "이겼습니다!"
-        span[0].innerHTML = ++span[0].innerHTML
+        span[0].innerHTML = coin + 2
         localStorage.coin = span[0].innerHTML
       } else {
         RF.innerHTML = "졌습니다!"
@@ -122,7 +127,7 @@ function RCP ( e ) {
         RF.innerHTML = "졌습니다!"
       } else {
         RF.innerHTML = "이겼습니다!"
-        span[0].innerHTML = ++span[0].innerHTML
+        span[0].innerHTML = coin + 2
         localStorage.coin = span[0].innerHTML
       }
     }
@@ -131,3 +136,53 @@ function RCP ( e ) {
 input[0].addEventListener('click', RCP)
 input[1].addEventListener('click', RCP)
 input[2].addEventListener('click', RCP)
+
+// localStorage에 도감 property 추가
+if ( !localStorage.illustBook ) {
+  localStorage.setItem('illustBook', '')
+} else {
+  const localCatData = JSON.parse(localStorage.illustBook)
+  localCatData.map((catData) => {
+    const cat = document.createElement('div')
+    cat.className = 'catCard'
+    document.querySelector('.cardArea').appendChild(cat)
+    const cardImg = document.createElement('div')
+    cardImg.className = 'catCardImg'
+    cat.appendChild(cardImg)
+    const removeBtn = document.createElement('button')
+    removeBtn.className = 'removeBtn'
+    removeBtn.innerHTML = "삭제하기"
+    cat.appendChild(removeBtn)
+    cardImg.style.backgroundImage = `url("${catData.img}")`
+  })
+}
+
+// 도감 열기, 닫기
+btn[1].addEventListener('click', function () {
+  modal2.style.display = 'block'
+})
+xBtn.addEventListener('click', function () {
+  modal2.style.display = 'none'
+})
+
+// 도감 추가
+const catInf = {level: '', attack: '', pretty: '', img: ''}
+btn[3].addEventListener('click', function () {
+  if ( window.confirm("지금 뽑은 고양이를 도감에 추가하시겠읍니까?") ) {
+    if ( catImgUrl === '' ) {
+      window.alert("추가할 수 있는 고양이가 없읍니다!")
+    } else {
+      catInf.level = span[1].innerHTML
+      catInf.attack = span[2].innerHTML
+      catInf.pretty = span[3].innerHTML
+      catInf.img = catImgUrl
+      if ( localStorage.illustBook === '' ) {
+        localStorage.illustBook = JSON.stringify([catInf])
+      } else {
+        const localCatData = JSON.parse(localStorage.illustBook)
+        localCatData.push(catInf)
+        localStorage.illustBook = JSON.stringify(localCatData)
+      }
+    }
+  }
+})

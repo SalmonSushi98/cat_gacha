@@ -3,18 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sample</title>
+    <title>고양이 뽑기</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="main.js" defer></script>
+    <script src="https://kit.fontawesome.com/41cfd1a334.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <h1>강한 고양이를 뽑아보세요.</h1>
     <div class="coinStatus">
       코인: <span>10</span>개
       <button>코인 얻기</button>
+      <button>도감</button>
     </div>
     <div class="catImg"></div>
     <div class="catStatus">
@@ -23,7 +22,8 @@
       <div class="pretty">귀여움: <span></span></div>
     </div>
     <br />
-    <button>뽑기</button>
+    <button class="bottom getBtn">뽑기</button>
+    <button class="bottom addBtn">추가하기</button>
     <div id="modal">
       <div class="modal-content">
         <div class="gameBoard">
@@ -36,6 +36,15 @@
           </div>
         </div>
         <button class="back">돌아가기</button>
+      </div>
+    </div>
+    <div id="modal2">
+      <div class="modal-content2">
+        <div class="modal2__top">
+          <i class="fas fa-window-close"></i>
+        </div>
+        <p>고양이 도감</p>
+        <div class="cardArea"></div>
       </div>
     </div>
   </body>

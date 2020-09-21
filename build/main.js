@@ -139,21 +139,32 @@ input[2].addEventListener('click', RCP)
 
 // localStorage에 도감 property 추가
 if ( !localStorage.illustBook ) {
-  localStorage.setItem('illustBook', '')
+  localStorage.setItem('illustBook', "[]")
 } else {
   const localCatData = JSON.parse(localStorage.illustBook)
-  localCatData.map((catData) => {
+  localCatData.map(( catData ) => {
+    const cardArea = document.querySelector('.cardArea')
     const cat = document.createElement('div')
     cat.className = 'catCard'
-    document.querySelector('.cardArea').appendChild(cat)
+    cardArea.appendChild(cat)
     const cardImg = document.createElement('div')
     cardImg.className = 'catCardImg'
+    cardImg.style.backgroundImage = `url("${catData.img}")`
     cat.appendChild(cardImg)
     const removeBtn = document.createElement('button')
     removeBtn.className = 'removeBtn'
     removeBtn.innerHTML = "삭제하기"
     cat.appendChild(removeBtn)
-    cardImg.style.backgroundImage = `url("${catData.img}")`
+    const divCatImgUrl = cardImg.style.backgroundImage.substr(5).replace('")', '')
+    removeBtn.addEventListener('click', () => {
+      localCatData.forEach(( catData, index ) => {
+        if ( catData.img === divCatImgUrl ) {
+          localCatData.splice(index, 1)
+          localStorage.illustBook = JSON.stringify(localCatData)
+          cardArea.removeChild(cardArea.children[index])
+        }
+      })
+    })
   })
 }
 
@@ -169,20 +180,39 @@ xBtn.addEventListener('click', function () {
 const catInf = {level: '', attack: '', pretty: '', img: ''}
 btn[3].addEventListener('click', function () {
   if ( window.confirm("지금 뽑은 고양이를 도감에 추가하시겠읍니까?") ) {
-    if ( catImgUrl === '' ) {
+    if ( catImgUrl === '' || span[1].innerHTML === '' || span[2].innerHTML === '' || span[3].innerHTML === '' ) {
       window.alert("추가할 수 있는 고양이가 없읍니다!")
     } else {
       catInf.level = span[1].innerHTML
       catInf.attack = span[2].innerHTML
       catInf.pretty = span[3].innerHTML
       catInf.img = catImgUrl
-      if ( localStorage.illustBook === '' ) {
-        localStorage.illustBook = JSON.stringify([catInf])
-      } else {
-        const localCatData = JSON.parse(localStorage.illustBook)
-        localCatData.push(catInf)
-        localStorage.illustBook = JSON.stringify(localCatData)
-      }
+      const localCatData = JSON.parse(localStorage.illustBook)
+      localCatData.push(catInf)
+      localStorage.illustBook = JSON.stringify(localCatData)
+      const cardArea = document.querySelector('.cardArea')
+      const cat = document.createElement('div')
+      cat.className = 'catCard'
+      cardArea.appendChild(cat)
+      const cardImg = document.createElement('div')
+      cardImg.className = 'catCardImg'
+      cardImg.style.backgroundImage = `url("${catImgUrl}")`
+      cat.appendChild(cardImg)
+      const removeBtn = document.createElement('button')
+      removeBtn.className = 'removeBtn'
+      removeBtn.innerHTML = "삭제하기"
+      cat.appendChild(removeBtn)
+      const divCatImgUrl = cardImg.style.backgroundImage.substr(5).replace('")', '')
+      removeBtn.addEventListener('click', () => {
+        const localCatData2 = JSON.parse(localStorage.illustBook)
+        localCatData2.forEach(( catData, index ) => {
+          if ( catData.img === divCatImgUrl ) {
+            localCatData2.splice(index, 1)
+            localStorage.illustBook = JSON.stringify(localCatData2)
+            cardArea.removeChild(cardArea.children[index])
+          }
+        })
+      })
     }
   }
 })

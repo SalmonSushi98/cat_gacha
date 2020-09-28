@@ -6,6 +6,28 @@ const modal2 = document.querySelector('#modal2')
 const xBtn = document.querySelector('.modal2__top i')
 const input = document.querySelectorAll('input')
 let catImgUrl = ''
+let isNew = true
+
+// 등급 색깔
+const coloring = (level) => {
+  switch(level) {
+    case "노멀" :
+      return 'gray'
+    case "레어" :
+      return 'skyblue'
+    case "에픽" :
+      return 'purple'
+    case "유니크" :
+      return 'yellow'
+    case "레전드리" :
+      return 'lime'
+    case "고양이신" :
+      return 'red'
+    case "먐먀" :
+      return 'pink'
+  }
+}
+
 
 // 고양이 이미지 가져오기
 function getCatImg () {
@@ -67,6 +89,7 @@ btn[2].addEventListener('click', () => {
     if ( span[0].innerHTML > 0 ) {
       span[0].innerHTML = --span[0].innerHTML
       localStorage.coin = span[0].innerHTML
+      isNew = true
       getCatImg()
     } else {
       window.alert("코인이 부족합니다!")
@@ -158,33 +181,23 @@ if ( !localStorage.illustBook ) {
       modal2.style.display = 'none'
       img.style.backgroundImage = `url("${catData.img}")`
       span[1].innerHTML = cat.level
-      switch(cat.level) {
-        case "노멀" :
-          span[1].style.color = 'gray'
-          break
-        case "레어" :
-          span[1].style.color = 'skyblue'
-          break
-        case "에픽" :
-          span[1].style.color = 'purple'
-          break
-        case "유니크" :
-          span[1].style.color = 'yellow'
-          break
-        case "레전드리" :
-          span[1].style.color = 'lime'
-          break
-        case "고양이신" :
-          span[1].style.color = 'red'
-          break
-        case "먐먀" :
-          span[1].style.color = 'pink'
-          break
-      }
+      span[1].style.color = coloring(cat.level)
       span[2].innerHTML = cat.attack
       span[3].innerHTML = cat.pretty
+      catImgUrl = catData.img
+      isNew = false
     })
     cat.appendChild(cardImg)
+    const detailBox = document.createElement('div')
+    detailBox.className = 'detailBox'
+    cat.appendChild(detailBox)
+    const detail__level = document.createElement('span')
+    detail__level.innerHTML = cat.level
+    detail__level.style.color = coloring(cat.level)
+    const detail__other = document.createElement('span')
+    detail__other.innerHTML = ` / ${cat.attack} / ${cat.pretty}`
+    detailBox.appendChild(detail__level)
+    detailBox.appendChild(detail__other)
     const removeBtn = document.createElement('button')
     removeBtn.className = 'removeBtn'
     removeBtn.innerHTML = "삭제하기"
@@ -216,6 +229,8 @@ btn[3].addEventListener('click', function () {
   if ( window.confirm("지금 뽑은 고양이를 도감에 추가하시겠읍니까?") ) {
     if ( catImgUrl === '' || span[1].innerHTML === '' || span[2].innerHTML === '' || span[3].innerHTML === '' ) {
       window.alert("추가할 수 있는 고양이가 없읍니다!")
+    } else if ( !isNew ) {
+      window.alert("이 고양이는 이미 도감에 있읍니다!")
     } else {
       catInf.level = span[1].innerHTML
       catInf.attack = span[2].innerHTML
@@ -239,33 +254,23 @@ btn[3].addEventListener('click', function () {
         modal2.style.display = 'none'
         img.style.backgroundImage = cardImg.style.backgroundImage
         span[1].innerHTML = cat.level
-        switch(cat.level) {
-          case "노멀" :
-            span[1].style.color = 'gray'
-            break
-          case "레어" :
-            span[1].style.color = 'skyblue'
-            break
-          case "에픽" :
-            span[1].style.color = 'purple'
-            break
-          case "유니크" :
-            span[1].style.color = 'yellow'
-            break
-          case "레전드리" :
-            span[1].style.color = 'lime'
-            break
-          case "고양이신" :
-            span[1].style.color = 'red'
-            break
-          case "먐먀" :
-            span[1].style.color = 'pink'
-            break
-        }
+        span[1].style.color = coloring(cat.level)
         span[2].innerHTML = cat.attack
         span[3].innerHTML = cat.pretty
+        catImgUrl = cardImg.style.backgroundImage.substr(5).replace('")', '')
+        isNew = false
       })
       cat.appendChild(cardImg)
+      const detailBox = document.createElement('div')
+      detailBox.className = 'detailBox'
+      cat.appendChild(detailBox)
+      const detail__level = document.createElement('span')
+      detail__level.innerHTML = cat.level
+      detail__level.style.color = coloring(cat.level)
+      const detail__other = document.createElement('span')
+      detail__other.innerHTML = ` / ${cat.attack} / ${cat.pretty}`
+      detailBox.appendChild(detail__level)
+      detailBox.appendChild(detail__other)
       const removeBtn = document.createElement('button')
       removeBtn.className = 'removeBtn'
       removeBtn.innerHTML = "삭제하기"
@@ -282,5 +287,6 @@ btn[3].addEventListener('click', function () {
         })
       })
     }
+    isNew = false
   }
 })

@@ -100,11 +100,15 @@ h1 {
 }
 .catCard {
   width: 7rem; height: 12rem;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 }
 .catCardImg {
   width: 100%; height: 80%;
   background-size: cover;
+}
+.detailBox {
+  width: 100%;
+  font-size: 0.9rem;
 }
 .removeBtn {
   width: 100%

@@ -2,7 +2,7 @@ body {
   text-align: center;
 }
 h1 {
-  margin-bottom: -0.8rem;
+  margin-bottom: -0.8em;
 }
 .catImg {
   width: 50vw; max-width: 400px;
@@ -14,16 +14,16 @@ h1 {
   margin: auto;
 }
 .catStatus {
-  font-size: 2rem;
+  font-size: 2em;
 }
 .coinStatus {
-  font-size: 1.2rem;
-  margin-bottom: -0.6rem;
-  padding: 1rem;
+  font-size: 1.2em;
+  margin-bottom: -0.6em;
+  padding: 1em;
 }
 .coinStatus button, .bottom {
-  margin-left: 0.5rem;
-  font-size: 1.2rem;
+  margin-left: 0.5em;
+  font-size: 1.2em;
 }
 #modal, #modal2 {
   background-color: rgba(0, 0, 0, 0.3);
@@ -35,7 +35,7 @@ h1 {
   width: 40vw; max-width: 380px; min-width: 260px;
   height: 75vh; max-height: 400px;
   background-color: white;
-  margin: 2rem auto; padding-bottom: 2rem;
+  margin: 2em auto; padding-bottom: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,24 +71,24 @@ h1 {
   width: 70vw; max-width: 380px; min-width: 260px;
   height: 75vh; max-height: 400px;
   background-color: white;
-  margin: 2rem auto; padding-bottom: 2rem;
+  margin: 2em auto; padding-bottom: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .modal-content2 p {
-  font-size: 1.5rem;
+  font-size: 1.5em;
 }
 .modal2__top {
   width: 100%;
   padding: 0.5em;
   display: block;
   text-align: right;
-  margin-bottom: -4rem;
+  margin-bottom: -4em;
 }
 .modal-content2 i {
   color: red;
-  font-size: 2rem;
+  font-size: 2em;
   margin-right: 0.5em;
 }
 .cardArea {
@@ -108,7 +108,7 @@ h1 {
 }
 .detailBox {
   width: 100%;
-  font-size: 0.8rem;
+  font-size: 0.7em;
 }
 .removeBtn {
   width: 100%

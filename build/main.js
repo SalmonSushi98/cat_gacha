@@ -146,10 +146,44 @@ if ( !localStorage.illustBook ) {
     const cardArea = document.querySelector('.cardArea')
     const cat = document.createElement('div')
     cat.className = 'catCard'
+    cat.level = catData.level
+    cat.attack = catData.attack
+    cat.pretty = catData.pretty
     cardArea.appendChild(cat)
     const cardImg = document.createElement('div')
     cardImg.className = 'catCardImg'
     cardImg.style.backgroundImage = `url("${catData.img}")`
+    cardImg.addEventListener('click', () => {
+      console.log(cat.level, cat.attack, cat.pretty)
+      modal2.style.display = 'none'
+      img.style.backgroundImage = `url("${catData.img}")`
+      span[1].innerHTML = cat.level
+      switch(cat.level) {
+        case "노멀" :
+          span[1].style.color = 'gray'
+          break
+        case "레어" :
+          span[1].style.color = 'skyblue'
+          break
+        case "에픽" :
+          span[1].style.color = 'purple'
+          break
+        case "유니크" :
+          span[1].style.color = 'yellow'
+          break
+        case "레전드리" :
+          span[1].style.color = 'lime'
+          break
+        case "고양이신" :
+          span[1].style.color = 'red'
+          break
+        case "먐먀" :
+          span[1].style.color = 'pink'
+          break
+      }
+      span[2].innerHTML = cat.attack
+      span[3].innerHTML = cat.pretty
+    })
     cat.appendChild(cardImg)
     const removeBtn = document.createElement('button')
     removeBtn.className = 'removeBtn'
@@ -158,7 +192,7 @@ if ( !localStorage.illustBook ) {
     const divCatImgUrl = cardImg.style.backgroundImage.substr(5).replace('")', '')
     removeBtn.addEventListener('click', () => {
       localCatData.forEach(( catData, index ) => {
-        if ( catData.img === divCatImgUrl ) {
+        if ( catData.img === divCatImgUrl && catData.level === cat.level && catData.attack === cat.attack && catData.pretty === cat.pretty ) {
           localCatData.splice(index, 1)
           localStorage.illustBook = JSON.stringify(localCatData)
           cardArea.removeChild(cardArea.children[index])
@@ -193,10 +227,44 @@ btn[3].addEventListener('click', function () {
       const cardArea = document.querySelector('.cardArea')
       const cat = document.createElement('div')
       cat.className = 'catCard'
+      cat.level = catInf.level
+      cat.attack = catInf.attack
+      cat.pretty = catInf.pretty
       cardArea.appendChild(cat)
       const cardImg = document.createElement('div')
       cardImg.className = 'catCardImg'
       cardImg.style.backgroundImage = `url("${catImgUrl}")`
+      cardImg.addEventListener('click', () => {
+        console.log(cat.level, cat.attack, cat.pretty)
+        modal2.style.display = 'none'
+        img.style.backgroundImage = cardImg.style.backgroundImage
+        span[1].innerHTML = cat.level
+        switch(cat.level) {
+          case "노멀" :
+            span[1].style.color = 'gray'
+            break
+          case "레어" :
+            span[1].style.color = 'skyblue'
+            break
+          case "에픽" :
+            span[1].style.color = 'purple'
+            break
+          case "유니크" :
+            span[1].style.color = 'yellow'
+            break
+          case "레전드리" :
+            span[1].style.color = 'lime'
+            break
+          case "고양이신" :
+            span[1].style.color = 'red'
+            break
+          case "먐먀" :
+            span[1].style.color = 'pink'
+            break
+        }
+        span[2].innerHTML = cat.attack
+        span[3].innerHTML = cat.pretty
+      })
       cat.appendChild(cardImg)
       const removeBtn = document.createElement('button')
       removeBtn.className = 'removeBtn'
